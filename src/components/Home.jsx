@@ -2,24 +2,26 @@ import React, { useState } from "react";
 import "../styles/home.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClone } from "@fortawesome/free-regular-svg-icons";
-import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
+import { faArrowsRotate, faBroom } from "@fortawesome/free-solid-svg-icons";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { QRCodeCanvas } from "qrcode.react";
-import logo from "../assets/convertofy-horizontal.png"
+import logo from "../assets/convertofy-horizontal.png";
 
 const Home = () => {
   const [inputValue, setInputValue] = useState("");
-  const [showPopup, setShowPopup] = useState(false);
+  const [showCopyPopup, setShowCopyPopup] = useState(false);
+  const [showClearPopup, setShowClearPopup] = useState(false);
   const [showQRCode, setShowQRCode] = useState(false);
-  const [activeTab, setActiveTab] = useState("randomText");
+  const [activeTab, setActiveTab] = useState("CaseConversion");
 
   const handleCopyToClipboard = () => {
     navigator.clipboard
       .writeText(inputValue)
       .then(() => {
-        setShowPopup(true);
+        setShowCopyPopup(true);
         setTimeout(() => {
-          setShowPopup(false);
-        }, 5000);
+          setShowCopyPopup(false);
+        }, 3000);
       })
       .catch((err) => {
         console.error("Failed to copy: ", err);
@@ -28,6 +30,10 @@ const Home = () => {
 
   const handleClear = () => {
     setInputValue("");
+    setShowClearPopup(true);
+    setTimeout(() => {
+      setShowClearPopup(false);
+    }, 3000);
   };
 
   const handleUpperCase = () => {
@@ -214,41 +220,34 @@ const Home = () => {
           height={100}
         />
         <div className="tools">
-          <span className="tools-child" onClick={handleCopyToClipboard}>
-            {" "}
-            <FontAwesomeIcon icon={faClone} style={{ color: "#e31c5f" }} />
-            <span>Copy</span>
-          </span>
-          <span className="tools-child" onClick={handleClear}>
-            {" "}
-            <FontAwesomeIcon
-              icon={faArrowsRotate}
-              style={{ color: "#e31c5f" }}
-            />
-            <span>Clear</span>
-          </span>
+          {!showCopyPopup ? (
+            <span className="tools-child" onClick={handleCopyToClipboard}>
+              <FontAwesomeIcon icon={faClone} style={{ color: "#e31c5f" }} />
+              <span>Copy</span>
+            </span>
+          ) : (
+            <span className="tools-child">
+              <FontAwesomeIcon icon={faCheck} style={{ color: "#20c997" }} />
+              <span style={{ color: "#20c997" }}>Copied</span>
+            </span>
+          )}
+          {!showClearPopup ? (
+            <span className="tools-child" onClick={handleClear}>
+              <FontAwesomeIcon
+                icon={faArrowsRotate}
+                style={{ color: "#e31c5f" }}
+              />
+              <span>Clear</span>
+            </span>
+          ) : (
+            <span className="tools-child">
+              <FontAwesomeIcon icon={faBroom} style={{ color: "#20c997" }} />
+              <span style={{ color: "#20c997" }}>Cleared</span>
+            </span>
+          )}
         </div>
       </div>
       <div className="tools-container">
-
-        {showPopup && (
-          <div
-          className="toast align-items-center text-white bg-success border-0"
-          role="alert"
-          aria-live="assertive"
-          aria-atomic="true"
-        >
-          <div className="d-flex">
-            <div className="toast-body">Copied!</div>
-            <button
-              type="button"
-              className="btn-close btn-close-white me-2 m-auto"
-              data-bs-dismiss="toast"
-              aria-label="Close"
-            ></button>
-          </div>
-        </div>
-        )}
         <textarea
           className="main-input-box"
           type="text"
@@ -259,80 +258,123 @@ const Home = () => {
             setShowQRCode(false);
           }}
         />
-        <div>
-          <button
-            onClick={() => setActiveTab("CaseConversion")}
-            style={{
-              // padding: "10px 20px",
-              // marginRight: "10px",
-              backgroundColor:
-                activeTab === "CaseConversion" ? "#007bff" : "#ccc",
-              color: activeTab === "CaseConversion" ? "white" : "black",
-              border: "#000000",
-              borderRadius: "10px",
-              cursor: "pointer",
-            }}
-          >
-            Case Conversion
-          </button>
-          <button
-            onClick={() => setActiveTab("Randoms")}
-            style={{
-              padding: "10px 20px",
-              backgroundColor: activeTab === "Randoms" ? "#007bff" : "#ccc",
-              color: activeTab === "Randoms" ? "white" : "black",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
-            Randoms
-          </button>
-          <button
-            onClick={() => setActiveTab("othertools")}
-            style={{
-              padding: "10px 20px",
-              backgroundColor: activeTab === "othertools" ? "#007bff" : "#ccc",
-              color: activeTab === "othertools" ? "white" : "black",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
-            Other Tools
-          </button>
-        </div>
+        <ul className="nav nav-tab">
+          <li className="nav-item">
+            <span
+              className="nav-link"
+              aria-current="page"
+              onClick={() => setActiveTab("CaseConversion")}
+              style={{
+                // padding: "10px 20px",
+                // marginRight: "10px",
+                // backgroundColor:
+                //   activeTab === "CaseConversion" ? "#007bff" : "#ccc",
+                color: activeTab === "CaseConversion" ? "#e31c5f" : "white",
+                // border: "#000000",
+                // borderRadius: "10px",
+                cursor: "pointer",
+              }}
+            >
+              Case Conversion
+            </span>
+          </li>
+          <li className="nav-item">
+            <span
+              className="nav-link"
+              onClick={() => setActiveTab("Randoms")}
+              style={{
+                // padding: "10px 20px",
+                // backgroundColor: activeTab === "Randoms" ? "#007bff" : "#ccc",
+                color: activeTab === "Randoms" ? "#e31c5f" : "white",
+                // border: "none",
+                // borderRadius: "5px",
+                cursor: "pointer",
+              }}
+            >
+              Randoms
+            </span>
+          </li>
+          <li className="nav-item">
+            <span
+              className="nav-link"
+              onClick={() => setActiveTab("othertools")}
+              style={{
+                //   padding: "10px 20px",
+                //   backgroundColor:
+                //     activeTab === "othertools" ? "#007bff" : "#ccc",
+                color: activeTab === "othertools" ? "#e31c5f" : "white",
+                //   border: "none",
+                //   borderRadius: "5px",
+                cursor: "pointer",
+              }}
+            >
+              Other Tools
+            </span>
+          </li>
+        </ul>
+        <div></div>
         {/* Tab Content */}
         {activeTab === "CaseConversion" && (
-          <div className="tools-container">
-            <button onClick={handleUpperCase}>Upper case</button>
-            <button onClick={handleLowerCase}>Lower case</button>
-            <button onClick={handleCapitalizedCase}>Capitalized Case</button>
-            <button onClick={handleAlternateCase}>aLtErNaTiNg cAsE</button>
+          <div className="sub-tools-container">
+            <button className="toolBtn" onClick={handleUpperCase}>
+              Upper case
+            </button>
+            <button className="toolBtn" onClick={handleLowerCase}>
+              Lower case
+            </button>
+            <button className="toolBtn" onClick={handleCapitalizedCase}>
+              Capitalized Case
+            </button>
+            <button className="toolBtn" onClick={handleAlternateCase}>
+              aLtErNaTiNg cAsE
+            </button>
           </div>
         )}
 
         {activeTab === "Randoms" && (
-          <div className="tools-container">
-            <button onClick={handleRandomSelection}>Random Selection</button>
-            <button onClick={handleRandomNumber}>Random Number</button>
-            <button onClick={handleRandomText}>Random Text</button>
+          <div className="sub-tools-container">
+            <button className="toolBtn" onClick={handleRandomSelection}>
+              Random Selection
+            </button>
+            <button className="toolBtn" onClick={handleRandomNumber}>
+              Random Number
+            </button>
+            <button className="toolBtn" onClick={handleRandomText}>
+              Random Text
+            </button>
           </div>
         )}
         {activeTab === "othertools" && (
-          <div className="tools-container">
-            <button onClick={handleQRCode}>QR Code Generator</button>
-            <button onClick={handleTrimSpace}>Trim space</button>
-            <button onClick={handleReverse}>Reverse</button>
-            <button onClick={handleRemoveDuplicates}>RemoveDuplicates</button>
+          <div className="sub-tools-container">
+            <button className="toolBtn" onClick={handleQRCode}>
+              QR Code Generator
+            </button>
+            <button className="toolBtn" onClick={handleTrimSpace}>
+              Trim space
+            </button>
+            <button className="toolBtn" onClick={handleReverse}>
+              Reverse
+            </button>
+            <button className="toolBtn" onClick={handleRemoveDuplicates}>
+              RemoveDuplicates
+            </button>
           </div>
         )}
 
-        <p style={{ marginTop: "20px", fontWeight: "bold" }}>
-          Character Count: {stats.characterCount} | Word Count:{" "}
-          {stats.wordCount} | Sentence Count: {stats.sentenceCount} | Line
-          Count: {stats.lineCount}
-        </p>
+        <div className="counts-container">
+          <p className="count" style={{ marginTop: "20px", fontWeight: "bold" }}>
+            Character Count: {stats.characterCount}
+          </p>
+          <p className="count" style={{ marginTop: "20px", fontWeight: "bold" }}>
+            Word Count: {stats.wordCount}
+          </p>
+          <p className="count" style={{ marginTop: "20px", fontWeight: "bold" }}>
+            Sentence Count: {stats.sentenceCount}
+          </p>
+          <p style={{ marginTop: "20px", fontWeight: "bold" }}>
+            Line Count: {stats.lineCount}
+          </p>
+        </div>
         {showQRCode && (
           <div style={{ marginTop: "20px" }}>
             <QRCodeCanvas

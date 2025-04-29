@@ -1,28 +1,28 @@
 .tools-container {
   display: flex;
   flex-direction: column;
-  gap: 1rem; 
+  gap: 1rem;
 }
-.header{
+.header {
   display: flex;
   justify-content: space-between;
 }
-.main-logo{
+.main-logo {
   width: 200px;
   height: 150px;
 }
-.tools{
+.tools {
   display: flex;
   place-items: end;
   margin-bottom: 1rem;
-  gap: 1rem;
+  gap: 2rem;
 }
-.span-container{
-    font-size: 16px; 
-    align-self: end;
-    padding: 1rem;
+.span-container {
+  font-size: 16px;
+  align-self: end;
+  padding: 1rem;
 }
-.tools-child{
+.tools-child {
   display: flex;
   gap: 10px;
 }
@@ -32,16 +32,15 @@
   padding: 1.5rem;
   display: block;
   border-radius: 1rem;
-
 }
 .main-input-box :active {
   border: none;
 }
 .tools-container {
   display: flex;
-  gap: 1rem;    
+  gap: 1rem;
 }
-button {
+.toolBtn {
   display: inline-block;
   outline: none;
   cursor: pointer;
@@ -60,4 +59,21 @@ button {
     rgb(215, 4, 102) 100%
   );
   color: #fff;
+}
+.sub-tools-container {
+  display: flex;
+  gap: 1rem;
+}
+.nav {
+  width: 50%;
+  border-bottom: 1px solid #d5d5d5;
+}
+.counts-container {
+  display: flex;
+  gap: 1rem;
+}
+.count::after {
+    content: " |";
+    margin-left: 4px;
+    color: #e31c5f;
 }

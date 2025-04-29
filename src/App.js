@@ -1,13 +1,15 @@
-import './App.css';
-import Home from './components/Home';
-
+import "./App.css";
+import Home from "./components/Home";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-       <Home />
+        <Home />
       </header>
+      <footer class="footer">
+        <p>&copy; 2025 Convertofy Solutions.</p>
+      </footer>
     </div>
   );
 }
