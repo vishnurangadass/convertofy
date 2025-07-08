@@ -1,0 +1,14 @@
+:root {
+  /* Light mode */
+  --bg-color: #ededed;
+  --white: #FFFFFF;
+  --primary: #e31c5f;
+  --on-primary: #ffffff;
+  --text-color: #222222;
+  --muted-text: #666666;
+  --border: #dddddd;
+  --hover: #c9114e;
+  --error-message : #ff0000;
+  --main-font: "Forum", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;;
+  --hand-written-font: "Playfair Display", serif;
+}

@@ -1,0 +1,71 @@
+.display-card{
+  display: flex;
+}
+
+.go-corner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+  top: 0;
+  right: 0;
+  background-color: #e31c5f;
+  border-radius: 0 4px 0 32px;
+}
+.card1 {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  position: relative;
+  width: 225px;
+  background-color: #f2f8f9;
+  border-radius: 4px;
+  padding: 32px 24px;
+  margin: 12px;
+  text-decoration: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.card1 p{
+  font-size: 1rem;
+  font-weight: 500;
+}
+.card1 span{
+  font-size: 2rem;
+  font-weight: 700;
+}
+.card1:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -16px;
+  right: -16px;
+  background: #e31c5f;
+  height: 32px;
+  width: 32px;
+  border-radius: 32px;
+  transform: scale(1);
+  transform-origin: 50% 50%;
+  transition: transform 0.25s ease-out;
+}
+
+.card1:hover:before {
+  transform: scale(21);
+}
+
+.card1:hover p {
+  transition: all 0.3s ease-out;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.card1:hover h3 {
+  transition: all 0.3s ease-out;
+  color: #fff;
+}
+.toolIcon{
+  width: 23px;
+  height: 23px;
+}

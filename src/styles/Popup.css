@@ -1,0 +1,8 @@
+.modal-form{
+    width: 500px;
+    position: absolute;
+    top: 10rem;
+    right: 30rem;
+    z-index: 1000;
+    color: black;
+}

@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../styles/home.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClone } from "@fortawesome/free-regular-svg-icons";
-import { faArrowsRotate, faBroom } from "@fortawesome/free-solid-svg-icons";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowsRotate,
+  faBroom,
+  faCheck,
+} from "@fortawesome/free-solid-svg-icons";
 import { QRCodeCanvas } from "qrcode.react";
-import logo from "../assets/convertofy-horizontal.png";
+import AgeCalculator from "./AgeCalculator";
+import EMICalculator from "./EMICalculator";
+
+// import { icon } from "@fortawesome/fontawesome-svg-core";
 
 const Home = () => {
   const [inputValue, setInputValue] = useState("");
@@ -13,7 +19,15 @@ const Home = () => {
   const [showClearPopup, setShowClearPopup] = useState(false);
   const [showQRCode, setShowQRCode] = useState(false);
   const [activeTab, setActiveTab] = useState("CaseConversion");
+  const [teams, setTeams] = useState({ teamA: [], teamB: [] });
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("danger");
+  const [showAgeCalculator, setShowAgeCalculator] = useState(false);
+  const [showEMICalculator, setShowEMICalculator] = useState(false);
+ 
 
+
+  // Function to handle copy to clipboard
   const handleCopyToClipboard = () => {
     navigator.clipboard
       .writeText(inputValue)
@@ -28,6 +42,7 @@ const Home = () => {
       });
   };
 
+  // Function to handle clear input
   const handleClear = () => {
     setInputValue("");
     setShowClearPopup(true);
@@ -36,14 +51,17 @@ const Home = () => {
     }, 3000);
   };
 
+  // Functions for case conversion
   const handleUpperCase = () => {
     setInputValue(inputValue.toUpperCase());
   };
 
+  // Function to handle lower case
   const handleLowerCase = () => {
     setInputValue(inputValue.toLowerCase());
   };
 
+  // Function to handle capitalized case
   const handleCapitalizedCase = () => {
     const capitalized = inputValue
       .split(" ")
@@ -53,6 +71,7 @@ const Home = () => {
     setInputValue(capitalized);
   };
 
+  // Function to handle alternate case
   const handleAlternateCase = () => {
     let newText = "";
     for (let i = 0; i < inputValue.length; i++) {
@@ -65,15 +84,18 @@ const Home = () => {
     setInputValue(newText);
   };
 
+  // Functions for other tools
   const handleTrimSpace = () => {
     setInputValue(inputValue?.trim());
   };
 
+  // Function to handle reverse
   const handleReverse = () => {
     const reversed = inputValue.split("").reverse().join("");
     setInputValue(reversed);
   };
 
+  // Function to handle random number generation
   const handleRandomNumber = () => {
     const digitsInput = prompt("How many digits per number do you need?");
     const digits = parseInt(digitsInput);
@@ -104,6 +126,7 @@ const Home = () => {
     setInputValue(randomNumbersList.join(", "));
   };
 
+  // Function to handle removing duplicates
   const handleRemoveDuplicates = () => {
     const wordsArray = inputValue?.trim().split(/\s+/);
     const uniqueWords = [...new Set(wordsArray)];
@@ -120,13 +143,15 @@ const Home = () => {
     return { characterCount, wordCount, sentenceCount, lineCount };
   };
 
+  // Function to handle random selection
   const handleRandomSelection = () => {
     if (inputValue.trim() === "") {
-      alert("Please enter some text!");
-      return;
+      return (
+        <div className="alert alert-danger" role="alert">
+          Please enter some text!
+        </div>
+      );
     }
-
-    // Split input into an array (assuming separated by new lines or commas)
     const items = inputValue
       .split(/[\n,]+/)
       .map((item) => item.trim())
@@ -136,8 +161,6 @@ const Home = () => {
       alert("No valid items found!");
       return;
     }
-
-    // Ask user how many they want
     const userInput = prompt(
       `There are ${items.length} items. How many random selections you want?`
     );
@@ -152,12 +175,11 @@ const Home = () => {
       alert(`You can't select more than ${items.length} items!`);
       return;
     }
-
-    // Randomly pick 'n' items
     const shuffled = [...items].sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, n);
     setInputValue(selected.join("\n"));
   };
+  // Function to handle QR code generation
   const handleQRCode = () => {
     if (inputValue.trim() === "") {
       alert("Please enter some text to generate QR Code!");
@@ -170,10 +192,7 @@ const Home = () => {
       alert("Please enter some characters to generate from!");
       return;
     }
-
     const characters = inputValue.split("").filter((c) => c.trim() !== "");
-
-    // Ask for length
     const lengthInput = prompt("Enter the length of each random text:");
     const textLength = parseInt(lengthInput);
 
@@ -181,8 +200,6 @@ const Home = () => {
       alert("Please enter a valid length!");
       return;
     }
-
-    // Ask for combinations
     const comboInput = prompt("Enter how many random combinations you want:");
     const comboCount = parseInt(comboInput);
 
@@ -191,6 +208,7 @@ const Home = () => {
       return;
     }
 
+    // Generate random text
     const generateRandomText = () => {
       let result = "";
       for (let i = 0; i < textLength; i++) {
@@ -207,47 +225,117 @@ const Home = () => {
     setInputValue(generatedTexts.join("\n"));
   };
 
+  // Function to handle team split
+  const handleTeamSplit = () => {
+    if (inputValue.trim() === "") {
+      setAlertMessage("Please enter some names.");
+      setAlertType("danger");
+      return;
+    }
+    const names = inputValue
+      .split(/[\n,]+/)
+      .map((name) => name.trim())
+      .filter((name) => name !== "");
+
+    if (names.length < 2) {
+      setAlertMessage("Please enter at least 2 names.");
+      setAlertType("danger");
+      return;
+    }
+    const shuffled = [...names].sort(() => 0.5 - Math.random());
+
+    const half = Math.ceil(shuffled.length / 2);
+    const teamA = shuffled.slice(0, half);
+    const teamB = shuffled.slice(half);
+
+    setTeams({ teamA, teamB });
+    setAlertMessage(`Successfully split into 2 teams!`);
+    setAlertType("success");
+  };
+
   const stats = getTextStats(inputValue);
 
   return (
     <div className="main-container">
-      <div className="header">
-        <img
-          className="main-logo"
-          src={logo}
-          alt="logo"
-          width={100}
-          height={100}
-        />
-        <div className="tools">
-          {!showCopyPopup ? (
-            <span className="tools-child" onClick={handleCopyToClipboard}>
-              <FontAwesomeIcon icon={faClone} style={{ color: "#e31c5f" }} />
-              <span>Copy</span>
-            </span>
-          ) : (
-            <span className="tools-child">
-              <FontAwesomeIcon icon={faCheck} style={{ color: "#20c997" }} />
-              <span style={{ color: "#20c997" }}>Copied</span>
-            </span>
-          )}
-          {!showClearPopup ? (
-            <span className="tools-child" onClick={handleClear}>
-              <FontAwesomeIcon
-                icon={faArrowsRotate}
-                style={{ color: "#e31c5f" }}
-              />
-              <span>Clear</span>
-            </span>
-          ) : (
-            <span className="tools-child">
-              <FontAwesomeIcon icon={faBroom} style={{ color: "#20c997" }} />
-              <span style={{ color: "#20c997" }}>Cleared</span>
-            </span>
-          )}
-        </div>
-      </div>
+     
+
       <div className="tools-container">
+        <div className="content-header">
+          <div className="tools">
+            {!showCopyPopup ? (
+              <span className="tools-child" onClick={handleCopyToClipboard}>
+                <FontAwesomeIcon
+                  className="headerIcon"
+                  icon={faClone}
+                  style={{ color: "#e31c5f" }}
+                />
+                <span className="headerTool">Copy</span>
+              </span>
+            ) : (
+              <span className="tools-child">
+                <FontAwesomeIcon
+                  className="headerIcon"
+                  icon={faCheck}
+                  style={{ color: "#20c997" }}
+                />
+                <span className="headerTool" style={{ color: "#20c997" }}>
+                  Copied
+                </span>
+              </span>
+            )}
+            {!showClearPopup ? (
+              <span className="tools-child" onClick={handleClear}>
+                <FontAwesomeIcon
+                  className="headerIcon"
+                  icon={faArrowsRotate}
+                  style={{ color: "#e31c5f" }}
+                />
+                <span className="headerTool">Clear</span>
+              </span>
+            ) : (
+              <span className="tools-child">
+                <FontAwesomeIcon
+                  className="headerIcon"
+                  icon={faBroom}
+                  style={{ color: "#20c997" }}
+                />
+                <span className="headerTool" style={{ color: "#20c997" }}>
+                  Cleared
+                </span>
+              </span>
+            )}
+
+            {alertMessage && (
+              <div className={`alert alert-${alertType} mt-3`} role="alert">
+                {alertMessage}
+              </div>
+            )}
+            {(teams.teamA.length > 0 || teams.teamB.length > 0) && (
+              <div className="row mt-4">
+                <div className="col-md-6">
+                  <h5>Team A</h5>
+                  <ul className="list-group">
+                    {teams.teamA.map((name, index) => (
+                      <li className="list-group-item" key={index}>
+                        {name}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="col-md-6">
+                  <h5>Team B</h5>
+                  <ul className="list-group">
+                    {teams.teamB.map((name, index) => (
+                      <li className="list-group-item" key={index}>
+                        {name}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
         <textarea
           className="main-input-box"
           type="text"
@@ -258,6 +346,7 @@ const Home = () => {
             setShowQRCode(false);
           }}
         />
+
         <ul className="nav nav-tab">
           <li className="nav-item">
             <span
@@ -265,13 +354,7 @@ const Home = () => {
               aria-current="page"
               onClick={() => setActiveTab("CaseConversion")}
               style={{
-                // padding: "10px 20px",
-                // marginRight: "10px",
-                // backgroundColor:
-                //   activeTab === "CaseConversion" ? "#007bff" : "#ccc",
-                color: activeTab === "CaseConversion" ? "#e31c5f" : "white",
-                // border: "#000000",
-                // borderRadius: "10px",
+                color: activeTab === "CaseConversion" && "#e31c5f",
                 cursor: "pointer",
               }}
             >
@@ -283,11 +366,7 @@ const Home = () => {
               className="nav-link"
               onClick={() => setActiveTab("Randoms")}
               style={{
-                // padding: "10px 20px",
-                // backgroundColor: activeTab === "Randoms" ? "#007bff" : "#ccc",
-                color: activeTab === "Randoms" ? "#e31c5f" : "white",
-                // border: "none",
-                // borderRadius: "5px",
+                color: activeTab === "Randoms" && "#e31c5f",
                 cursor: "pointer",
               }}
             >
@@ -299,12 +378,7 @@ const Home = () => {
               className="nav-link"
               onClick={() => setActiveTab("othertools")}
               style={{
-                //   padding: "10px 20px",
-                //   backgroundColor:
-                //     activeTab === "othertools" ? "#007bff" : "#ccc",
-                color: activeTab === "othertools" ? "#e31c5f" : "white",
-                //   border: "none",
-                //   borderRadius: "5px",
+                color: activeTab === "othertools" && "#e31c5f",
                 cursor: "pointer",
               }}
             >
@@ -313,7 +387,6 @@ const Home = () => {
           </li>
         </ul>
         <div></div>
-        {/* Tab Content */}
         {activeTab === "CaseConversion" && (
           <div className="sub-tools-container">
             <button className="toolBtn" onClick={handleUpperCase}>
@@ -342,6 +415,9 @@ const Home = () => {
             <button className="toolBtn" onClick={handleRandomText}>
               Random Text
             </button>
+            <button className="toolBtn" onClick={handleTeamSplit}>
+              Random Team Selection
+            </button>
           </div>
         )}
         {activeTab === "othertools" && (
@@ -358,17 +434,39 @@ const Home = () => {
             <button className="toolBtn" onClick={handleRemoveDuplicates}>
               RemoveDuplicates
             </button>
+            <button
+              className="toolBtn"
+              onClick={() => setShowAgeCalculator(true)}
+            >
+              Age Calculator
+            </button>
+            <button
+              className="toolBtn"
+              onClick={() => setShowEMICalculator(true)}
+            >
+              EMI Calculator
+            </button>
           </div>
         )}
-
+        <div>{showAgeCalculator && <AgeCalculator />}</div>
+        <div>{showEMICalculator && <EMICalculator />}</div>
         <div className="counts-container">
-          <p className="count" style={{ marginTop: "20px", fontWeight: "bold" }}>
+          <p
+            className="count"
+            style={{ marginTop: "20px", fontWeight: "bold" }}
+          >
             Character Count: {stats.characterCount}
           </p>
-          <p className="count" style={{ marginTop: "20px", fontWeight: "bold" }}>
+          <p
+            className="count"
+            style={{ marginTop: "20px", fontWeight: "bold" }}
+          >
             Word Count: {stats.wordCount}
           </p>
-          <p className="count" style={{ marginTop: "20px", fontWeight: "bold" }}>
+          <p
+            className="count"
+            style={{ marginTop: "20px", fontWeight: "bold" }}
+          >
             Sentence Count: {stats.sentenceCount}
           </p>
           <p style={{ marginTop: "20px", fontWeight: "bold" }}>
@@ -382,7 +480,7 @@ const Home = () => {
               size={200}
               bgColor="#ffffff"
               fgColor="#000000"
-              level="H" // High error correction
+              level="H"
               includeMargin={true}
             />
           </div>
