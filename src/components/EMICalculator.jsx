@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMoneyBills } from "@fortawesome/free-solid-svg-icons";
 import "../styles/emicalculator.css"; // Include the CSS below in this file or import separately
 
 const formatINR = (num) =>
@@ -59,7 +61,6 @@ const EMICalculator = () => {
   const [totalInterest, setTotalInterest] = useState("0");
   const [totalPayment, setTotalPayment] = useState("0");
 
-
   useEffect(() => {
     const monthlyRate = interestRate / 12 / 100;
     const months = loanTenure * 12;
@@ -74,8 +75,6 @@ const EMICalculator = () => {
     setTotalPayment(Math.round(totalPay));
   }, [loanAmount, interestRate, loanTenure]);
 
-  
-
   const handleCalculate = () => {
     const { emi, schedule } = generateSchedule(
       loanAmount,
@@ -84,15 +83,21 @@ const EMICalculator = () => {
     );
     setResult({ emi, totalInterest, totalPayment, schedule });
   };
- 
-
 
   return (
-    <div className="emicalculator-container">
-      <h2 className="emicalculator-container-h2">EMI Calculator</h2>
-
-      <div className="emicalculator-box">
-        <label className="emicalculator-label">
+    <div className="age-calculator-container">
+      <div className="case-converter-header">
+        <div>
+          <FontAwesomeIcon
+            className="toolIcon"
+            icon={faMoneyBills}
+            style={{ color: "#e31c5f" }}
+          />
+        </div>
+        <h3>EMI Calculator</h3>
+      </div>
+        <div className="age-calculator-box">
+        <label className="label">
           Loan Amount
           <input
             type="number"
@@ -100,7 +105,7 @@ const EMICalculator = () => {
             onChange={(e) => setLoanAmount(+e.target.value)}
           />
         </label>
-        <label className="emicalculator-label">
+        <label className="label">
           Interest Rate (%)
           <input
             type="number"
@@ -108,7 +113,7 @@ const EMICalculator = () => {
             onChange={(e) => setInterestRate(+e.target.value)}
           />
         </label>
-        <label className="emicalculator-label">
+        <label className="label">
           Loan Tenure (years)
           <input
             type="number"
@@ -116,9 +121,11 @@ const EMICalculator = () => {
             onChange={(e) => setLoanTenure(+e.target.value)}
           />
         </label>
-        <button className='emicalculator-button' onClick={handleCalculate}>Calculate</button>
+        <button className="case-converter" onClick={handleCalculate}>
+          Calculate
+        </button>
       </div>
-      
+
       {result && (
         <div>
           <div className="emicalculator-result">
@@ -151,7 +158,6 @@ const EMICalculator = () => {
                 <React.Fragment key={idx}>
                   <tr className="year-row">
                     <td colSpan="6">
-          
                       <strong>{yearBlock.year}</strong>
                     </td>
                   </tr>

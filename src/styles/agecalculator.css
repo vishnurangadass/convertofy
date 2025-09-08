@@ -4,7 +4,6 @@
 .age-calculator-wrapper {
   display: flex;
   flex-direction: column;
-  place-items: center;
   gap: 2rem;
 }
 .age-calculator-container {
@@ -17,11 +16,11 @@
   border-radius: 12px;
   display: flex;
   gap: 50px;
-  padding:50px 30px;
+  padding:50px 0px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   flex-direction: column;
-  width: 800px;
-  height: 450px;
+  width: 100%;
+  height: max-content;
   align-items: center;
   background-color: var(--white);
 }
@@ -102,7 +101,10 @@ input[type="date"] {
   transition: all 0.3s ease-out;
   color: rgba(255, 255, 255, 0.8);
 }
-
+.result-box:hover span {
+  transition: all 0.3s ease-out;
+  color: rgba(255, 255, 255, 0.8);
+}
 .result-box:hover h3 {
   transition: all 0.3s ease-out;
   color: #fff;

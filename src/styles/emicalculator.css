@@ -42,7 +42,9 @@
 }
 
 .emicalculator-label {
-  display: block;
+  display: flex;
+  place-items: center;
+  gap: 3rem;
   margin-bottom: 3px;
   margin-top: 5px;
   color: #333;

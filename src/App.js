@@ -16,48 +16,87 @@ import {
   faArrowUpAZ,
   faCalculator,
   faCalendarWeek,
+  faCoins,
   faHashtag,
+  faMoneyBills,
+  faPercentage,
+  faQrcode,
+  faScrewdriverWrench,
+  faSliders,
+  faKeyboard,
+  faSquareMinus,
 } from "@fortawesome/free-solid-svg-icons";
-import {
-  FaBookmark,
-  FaFont,
-  FaImage,
-  FaCss3Alt,
-  FaCode,
-  FaPalette,
-  FaShareAlt,
-  FaCog,
-  FaMoneyBillAlt,
-} from "react-icons/fa";
+
 import AgeCalculator from "./components/AgeCalculator";
 import WordCounter from "./components/WordCounter";
 import QrCodeGenerator from "./components/QrCodeGenerator";
-import SimpleInterestCalculator from "./components/SimpleInterestCalculator";  
-import CompoundInterestCalculator from "./components/CompoundInterestCalculator"; 
+import SimpleInterestCalculator from "./components/SimpleInterestCalculator";
+import CompoundInterestCalculator from "./components/CompoundInterestCalculator";
 import InstagramHashtagGenerator from "./components/InstagramHashtagGenerator";
+import UnderscoreRemover from "./components/UnderscoreRemover";
 
 function App() {
   const [activeIndex, setActiveIndex] = useState(null);
   const toolData = [
     {
-      category: "Favorite Tools",
-      items: ["Tool 1", "Tool 2"],
-      icon: <FaBookmark />,
-    },
-    {
-      category: "Text Tools",
+      category: "All Tools",
       items: [
         <Link className="App-link" to="/case-converter">
-           <FontAwesomeIcon className="menuIcon" icon={faArrowUpAZ} />
+          <FontAwesomeIcon className="menuIcon" icon={faArrowUpAZ} />
           Case Converter
         </Link>,
         <Link className="App-link" to="/word-counter">
           <FontAwesomeIcon className="menuIcon" icon={faCalculator} />
           Word Counter
         </Link>,
-
+        <Link className="App-link" to="/underscore-remover">
+          <FontAwesomeIcon className="menuIcon" icon={faSquareMinus} />
+          Underscore & Hyphen Remover
+        </Link>,
+        <Link className="App-link" to="/qr-code-generator">
+          <FontAwesomeIcon className="menuIcon" icon={faQrcode} />
+          QR Code Generator
+        </Link>,
+        <Link className="App-link" to="/instagram-hashtag-generator">
+          <FontAwesomeIcon className="menuIcon" icon={faHashtag} />
+          Hashtag Generator
+        </Link>,
+        <Link className="App-link" to="/age-calculator">
+          <FontAwesomeIcon className="menuIcon" icon={faCalendarWeek} /> Age
+          Calculator
+        </Link>,
+        <Link className="App-link" to="/emi-calculator">
+          <FontAwesomeIcon className="menuIcon" icon={faMoneyBills} />
+          EMI Calculator
+        </Link>,
+        <Link className="App-link" to="/simpleInterest-calculator">
+          <FontAwesomeIcon className="menuIcon" icon={faPercentage} />
+          Simple Interest Calculator
+        </Link>,
+        <Link className="App-link" to="/compoundInterest-calculator">
+          <FontAwesomeIcon className="menuIcon" icon={faCoins} />
+          Compound Interest Calculator
+        </Link>,
       ],
-      icon: <FaFont />,
+      icon: <FontAwesomeIcon className="menuIcon" icon={faScrewdriverWrench} />,
+    },
+    {
+      category: "Text Tools",
+      items: [
+        <Link className="App-link" to="/case-converter">
+          <FontAwesomeIcon className="menuIcon" icon={faArrowUpAZ} />
+          Case Converter
+        </Link>,
+        <Link className="App-link" to="/word-counter">
+          <FontAwesomeIcon className="menuIcon" icon={faCalculator} />
+          Word Counter
+        </Link>,
+        <Link className="App-link" to="/underscore-remover">
+          <FontAwesomeIcon className="menuIcon" icon={faSquareMinus} />
+          Underscore & Hyphen Remover
+        </Link>,
+      ],
+      icon: <FontAwesomeIcon className="menuIcon" icon={faKeyboard} />,
     },
     {
       category: "Calculators",
@@ -67,54 +106,33 @@ function App() {
           Calculator
         </Link>,
         <Link className="App-link" to="/emi-calculator">
-          <FontAwesomeIcon className="menuIcon" icon={faCalendarWeek} /> 
+          <FontAwesomeIcon className="menuIcon" icon={faMoneyBills} />
           EMI Calculator
         </Link>,
         <Link className="App-link" to="/simpleInterest-calculator">
-          <FontAwesomeIcon className="menuIcon" icon={faCalendarWeek} /> 
+          <FontAwesomeIcon className="menuIcon" icon={faPercentage} />
           Simple Interest Calculator
         </Link>,
         <Link className="App-link" to="/compoundInterest-calculator">
-          <FaMoneyBillAlt className="menuIcon" /> 
+          <FontAwesomeIcon className="menuIcon" icon={faCoins} />
           Compound Interest Calculator
         </Link>,
       ],
-      icon: <FaCss3Alt />,
-    },
-        {
-      category: "Converters",
-      items: ["Image Resizer", "Compressor", "Format Converter"],
-      icon: <FaImage />,
-    },
-    {
-      category: "Coding Tools",
-      items: ["JSON Formatter", "HTML Viewer"],
-      icon: <FaCode />,
-    },
-    {
-      category: "Color Tools",
-      items: ["Color Picker", "Palette Generator"],
-      icon: <FaPalette />,
-    },
-    {
-      category: "Social Media Tools",
-      items: [<Link className="App-link" to="/instagram-hashtag-generator">
-          <FontAwesomeIcon className="menuIcon" icon={faHashtag} />
-          Hashtag Generator
-        </Link>, "Post Scheduler"],
-      icon: <FaShareAlt />,
+      icon: <FontAwesomeIcon className="menuIcon" icon={faCalculator} />,
     },
     {
       category: "Miscellaneous Tools",
       items: [
         <Link className="App-link" to="/qr-code-generator">
-         QR Code Generator
+          <FontAwesomeIcon className="menuIcon" icon={faQrcode} />
+          QR Code Generator
         </Link>,
-        <Link className="App-link" to="/case-converter">
-          Case Converter
+        <Link className="App-link" to="/instagram-hashtag-generator">
+          <FontAwesomeIcon className="menuIcon" icon={faHashtag} />
+          Hashtag Generator
         </Link>,
       ],
-      icon: <FaCog />,
+      icon: <FontAwesomeIcon className="menuIcon" icon={faSliders} />,
     },
   ];
   const toggleMenu = (index) => {
@@ -135,20 +153,58 @@ function App() {
                 height={60}
               />
             </a>
-            {/* <nav className="navbar">
-              <Link className="App-link" to="/">
-                Home
-              </Link>
-              <Link className="App-link" to="/converter">
-                Unit Converter
-              </Link>
-              <Link className="App-link" to="/calculator">
-                EMI Calculator
-              </Link>
-              <Link className="App-link" to="/case-converter">
-                Case Converter
-              </Link>
-            </nav> */}
+          </div>
+          <div className="tools-wrapper">
+            {toolData.map((tool, index) => (
+              <div
+                key={tool.category}
+                className={
+                  activeIndex === index ? "menu-item-active" : "menu-item"
+                }
+              >
+                <div className="menu-header" onClick={() => toggleMenu(index)}>
+                  <div className="menu-left">
+                    {activeIndex === index ? (
+                      <span className="menu-icon" style={{ color: "#e31c5f" }}>
+                        {tool.icon}
+                      </span>
+                    ) : (
+                      <span className="menu-icon">{tool.icon} </span>
+                    )}
+                    {activeIndex === index ? (
+                      <span className="menu-title" style={{ color: "#e31c5f" }}>
+                        {tool.category}
+                      </span>
+                    ) : (
+                      <span className="menu-title">{tool.category}</span>
+                    )}
+                  </div>
+                  <div className="arrow">
+                    {activeIndex === index ? (
+                      <FontAwesomeIcon
+                        className="headerIcon"
+                        icon={faAngleUp}
+                        size="2xl"
+                        style={{ color: "#e31c5f" }}
+                      />
+                    ) : (
+                      <FontAwesomeIcon
+                        className="headerIcon"
+                        icon={faAngleDown}
+                        size="2xs"
+                      />
+                    )}
+                  </div>
+                </div>
+                {activeIndex === index && (
+                  <ul className="submenu">
+                    {tool.items.map((item, subIndex) => (
+                      <li key={`${tool.category}-${subIndex}`}>{item}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))}
           </div>
           {/* <ThemeToggle /> */}
         </div>
@@ -206,10 +262,23 @@ function App() {
               <Route path="/age-calculator" element={<AgeCalculator />} />
               <Route path="/case-converter" element={<CaseConverter />} />
               <Route path="/word-counter" element={<WordCounter />} />
+              <Route
+                path="/underscore-remover"
+                element={<UnderscoreRemover />}
+              />
               <Route path="/qr-code-generator" element={<QrCodeGenerator />} />
-              <Route path="/simpleInterest-calculator" element={<SimpleInterestCalculator />} />
-              <Route path="/compoundInterest-calculator" element={<CompoundInterestCalculator />} />
-              <Route path="/instagram-hashtag-generator" element={<InstagramHashtagGenerator />} />
+              <Route
+                path="/simpleInterest-calculator"
+                element={<SimpleInterestCalculator />}
+              />
+              <Route
+                path="/compoundInterest-calculator"
+                element={<CompoundInterestCalculator />}
+              />
+              <Route
+                path="/instagram-hashtag-generator"
+                element={<InstagramHashtagGenerator />}
+              />
             </Routes>
           </div>
         </aside>

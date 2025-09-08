@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClone } from "@fortawesome/free-regular-svg-icons";
+import { faClone, faSquareMinus } from "@fortawesome/free-regular-svg-icons";
 import {
   faArrowsRotate,
   faBroom,
   faCheck,
-  faArrowUpAZ
 } from "@fortawesome/free-solid-svg-icons";
 import "../styles/caseconverter.css";
 
-const CaseConverter = () => {
+const UnderscoreRemover = () => {
   const [inputValue, setInputValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -38,90 +37,38 @@ const CaseConverter = () => {
     }, 3000);
   };
 
-  // Functions for case conversion
-  const handleUpperCase = () => {
-    if (inputValue.length === 0) {
-      setShowError("Please enter some text to convert.");
-      return;
-    }
-    setInputValue(inputValue.toUpperCase());
-  };
+  const handleRemoveUnderscore = () => {
+  if (inputValue.length === 0) {
+    setShowError("Please enter some text to convert.");
+    return;
+  }
 
-  // Function to handle lower case
-  const handleLowerCase = () => {
-    if (inputValue.length === 0) {
-      setShowError("Please enter some text to convert.");
-      return;
-    }
-    setInputValue(inputValue.toLowerCase());
-  };
+  const capitalized = inputValue
+    .replace(/_/g, " ") // Replace underscores with spaces
+    .split(" ")
+    .map((word) =>
+      word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+    )
+    .join(" ");
 
-  // Function to handle capitalized case
-  const handleCapitalizedCase = () => {
-    if (inputValue.length === 0) {
-      setShowError("Please enter some text to convert.");
-      return;
-    }
-    const capitalized = inputValue
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-      .join(" ");
+  setInputValue(capitalized);
+};
+const handleRemoveHyphen = () => {
+  if (inputValue.length === 0) {
+    setShowError("Please enter some text to convert.");
+    return;
+  }
 
-    setInputValue(capitalized);
-  };
+  const capitalized = inputValue
+    .replace(/-/g, " ") // Replace underscores with spaces
+    .split(" ")
+    .map((word) =>
+      word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+    )
+    .join(" ");
 
-  // Function to handle alternate case
-  const handleInverseCase = () => {
-    if (inputValue.length === 0) {
-      setShowError("Please enter some text to convert.");
-      return;
-    }
-    let newText = "";
-    for (let i = 0; i < inputValue.length; i++) {
-      if (i % 2 === 0) {
-        newText += inputValue[i].toLowerCase();
-      } else {
-        newText += inputValue[i].toUpperCase();
-      }
-    }
-    setInputValue(newText);
-  };
-  const handleAlternateCase = () => {
-    if (inputValue.length === 0) {
-      setShowError("Please enter some text to convert.");
-      return;
-    }
-    let newText = "";
-    for (let i = 0; i < inputValue.length; i++) {
-      if (i % 2 === 0) {
-        newText += inputValue[i].toUpperCase();
-      } else {
-        newText += inputValue[i].toLowerCase();
-      }
-    }
-    setInputValue(newText);
-  };
-  const handleSentenceCase = () => {
-    if (inputValue.trim().length === 0) {
-      setShowError("Please enter some text to convert.");
-      return;
-    }
-
-    const sentenceCase = inputValue
-      .toLowerCase()
-      .split(/([.?!]\s*)/) // Split by punctuation and keep the delimiter
-      .map((part, index) => {
-        if (index % 2 === 0) {
-          // Even indices contain the sentence
-          return part.charAt(0).toUpperCase() + part.slice(1);
-        }
-        return part; // Odd indices contain the punctuation and space
-      })
-      .join("");
-
-    setInputValue(sentenceCase);
-    setShowError(""); // Clear error if successful
-  };
+  setInputValue(capitalized);
+};
 
   return (
     <div className="case-converter-wrapper">
@@ -129,11 +76,11 @@ const CaseConverter = () => {
         <div>
           <FontAwesomeIcon
             className="toolIcon"
-            icon={faArrowUpAZ}
+            icon={faSquareMinus}
             style={{ color: "#e31c5f" }}
           />
         </div>
-        <h3>Case Converter</h3>
+        <h3>Underscore & Hyphen Remover</h3>
       </div>
       <div>
         <div className="export-container">
@@ -200,23 +147,11 @@ const CaseConverter = () => {
       </div>
       <div className="case-converter-container">
         <div className="case-converter-tools-container">
-          <button className="case-converter" onClick={handleUpperCase}>
-            Upper case
+          <button className="case-converter" onClick={handleRemoveUnderscore}>
+            Remove Underscore
           </button>
-          <button className="case-converter" onClick={handleLowerCase}>
-            Lower case
-          </button>
-          <button className="case-converter" onClick={handleCapitalizedCase}>
-            Capitalized Case
-          </button>
-          <button className="case-converter" onClick={handleAlternateCase}>
-            aLtErNaTiNg cAsE
-          </button>
-          <button className="case-converter" onClick={handleInverseCase}>
-            InVeRsE cAsE
-          </button>
-          <button className="case-converter" onClick={handleSentenceCase}>
-            Sentence case
+          <button className="case-converter" onClick={handleRemoveHyphen}>
+            Remove Hyphen
           </button>
         </div>
       </div>
@@ -224,4 +159,4 @@ const CaseConverter = () => {
   );
 };
 
-export default CaseConverter;
+export default UnderscoreRemover;

@@ -1,7 +1,8 @@
+@import url("./colors.css");
+
 .display-card{
   display: flex;
 }
-
 .go-corner {
   display: flex;
   align-items: center;
@@ -59,8 +60,12 @@
 .card1:hover p {
   transition: all 0.3s ease-out;
   color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
 }
-
+.card1:hover span {
+  transition: all 0.3s ease-out;
+  color: rgba(255, 255, 255, 0.8);
+}
 .card1:hover h3 {
   transition: all 0.3s ease-out;
   color: #fff;

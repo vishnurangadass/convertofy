@@ -16,11 +16,13 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
 .App {
   background-color: #ededed;
   color: var(--text-color);
   font-family: var(--main-font);
 }
+
 .App-header {
   font-family: var(--main-font);
   min-height: 100vh;
@@ -32,10 +34,12 @@
   color: var(--text-color);
   padding: 0.5rem;
 }
-.error-message{
-  font-size: 14px;
+
+.error-message {
+  font-size: 1.25rem;
   color: var(--error-message);
 }
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -43,13 +47,15 @@
   margin: 0 0 0.25rem;
   padding: 0.25rem;
   place-items: center;
-  background-color: var(--on-primary);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(181, 181, 181, 1) 17%, rgba(227, 28, 95, 1) 53%);
 }
+
 .header-content {
   display: flex;
   gap: 2rem;
   place-items: center;
 }
+
 .mode-switch {
   color: var(--text-color);
   display: flex;
@@ -57,14 +63,18 @@
   place-items: center;
   font-size: 16px;
 }
+
 .navbar {
   display: flex;
   gap: 1rem;
 }
+
 .content-container {
   display: flex;
   gap: 1rem;
+  justify-content: center;
 }
+
 .App-link {
   display: flex;
   place-items: center;
@@ -74,7 +84,9 @@
   font-size: 1rem;
   font-weight: 500;
 }
-.App-link:hover, .App-link:active {
+
+.App-link:hover,
+.App-link:active {
   color: var(--primary);
   border: 2px solid var(--primary);
   border-right: none;
@@ -82,63 +94,78 @@
   border-top: none;
   padding-left: 10px;
 }
+
 .menuIcon {
   width: 20px;
   height: 20px;
 }
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
-li{
+
+li {
   list-style-type: none;
 }
+
 .footer {
   text-align: center;
   padding: 16px;
+  border-top:1px solid var(--muted-text);
   background-color: var(--secondar-color);
   color: var(--background-main);
   font-size: 14px;
 }
-textarea{
+
+textarea {
   overflow: auto;
 }
+
 .tools-container {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
+
 .content-header {
   display: flex;
   justify-content: end;
 }
+
 .tools {
   display: flex;
   place-items: end;
   margin-bottom: 1rem;
   gap: 2rem;
 }
+
 .span-container {
   font-size: 16px;
   align-self: end;
   padding: 1rem;
 }
+
 .tools-child {
   display: flex;
   gap: 0.25rem;
   place-items: center;
 }
+
 .headerIcon {
   width: 15px;
   height: 15px;
 }
+
 textarea {
   overflow: auto;
 }
+
 .main-input-box {
   width: 100%;
   height: 25%;
@@ -157,13 +184,16 @@ textarea {
   border-radius: 1rem;
   box-shadow: #8b8787 1px 0px 8px 5px */
 }
+
 .main-input-box :active {
   border: none;
 }
+
 .tools-container {
   display: flex;
   gap: 1rem;
 }
+
 .toolBtn {
   display: inline-block;
   outline: none;
@@ -179,38 +209,44 @@ textarea {
   background: whitesmoke;
   color: #0a0a0a;
 }
+
 .toolBtn :hover {
-  background: linear-gradient(
-    to right,
-    rgb(230, 30, 77) 0%,
-    rgb(227, 28, 95) 50%,
-    rgb(215, 4, 102) 100%
-  );
+  background: linear-gradient(to right,
+      rgb(230, 30, 77) 0%,
+      rgb(227, 28, 95) 50%,
+      rgb(215, 4, 102) 100%);
   color: #fff;
 }
+
 .sub-tools-container {
   display: flex;
   gap: 1rem;
 }
+
 .nav {
   width: 50%;
   border-bottom: 1px solid var(--muted-text);
 }
+
 .nav-link {
   color: var(--text-color);
 }
+
 .nav-link:hover {
   color: var(--hover);
 }
+
 .counts-container {
   display: flex;
   gap: 1rem;
 }
+
 .count::after {
   content: " |";
   margin-left: 4px;
   color: #e31c5f;
 }
+
 .tools-child {
   display: inline-flex;
   align-items: center;
@@ -246,6 +282,7 @@ textarea {
     opacity: 0;
     transform: scale(0.8);
   }
+
   100% {
     opacity: 1;
     transform: scale(1);
@@ -253,6 +290,7 @@ textarea {
 }
 
 .sidebar {
+  display: none;
   width: 25%;
   height: 100vh;
   background-color: #ffffff;
@@ -261,13 +299,18 @@ textarea {
   box-sizing: border-box;
   font-family: "Segoe UI", sans-serif;
   overflow: hidden auto;
-  scrollbar-width: thin; /* Firefox */
+  scrollbar-width: thin;
+  /* Firefox */
   scrollbar-color: #e31c5f white;
 }
+
 .sidebar::-webkit-scrollbar {
-  width: 8px; /* vertical scrollbar */
-  height: 8px; /* horizontal scrollbar */
+  width: 8px;
+  /* vertical scrollbar */
+  height: 8px;
+  /* horizontal scrollbar */
 }
+
 .sidebar::-webkit-scrollbar-track {
   background: white;
   border-radius: 10px;
@@ -283,52 +326,65 @@ textarea {
   background-color: #ff4c8b;
 }
 
+.tools-wrapper {
+  display: flex;
+  gap: 2rem;
+}
+
 .menu-item {
-  border-bottom: 1px solid #f0f0f0;
-  padding: 1rem;
   cursor: pointer;
   transition: background 0.2s ease;
 }
 
-.menu-item:hover {
+.menu-item-active {
+  position: relative;
+  left: 0;
+  top: 100%;
   background-color: var(--bg-color);
+  height: 40px;
 }
+
 
 .menu-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
 }
 
 .menu-left {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  gap: 0.5rem;
 }
 
 .menu-icon {
-  font-size: 16px;
-  color: #333;
+  color: var(--white);
 }
 
 .menu-title {
-  font-size: 16px;
-  color: #333;
-  font-weight: 500;
+  font-size: 18px;
+  color: var(--white);
+  font-weight: 700;
 }
 
 .arrow {
-  font-size: 14px;
-  color: #888;
+  color: var(--white);
+}
+.arrow svg{
+  width: 20px;
+  height: 20px;
 }
 
 .submenu {
-  margin-top: 8px;
+  margin-top: 1.5rem;
+  width: 300px;
+  padding: 1rem;
   font-size: 14px;
-  color: #555;
+  color: var(--white);
   display: flex;
   flex-direction: column;
   gap: 10px;
+  background: var(--muted-text);
 }
 
 /* Left Section - Form */
@@ -461,4 +517,67 @@ input[type="range"] {
 
 .emi-row strong {
   font-weight: 600;
+}
+/* Add to your CSS file */
+/* .tools-wrapper {
+  width: 300px;
+  margin: 20px;
+} */
+
+.menu-item {
+  /* border: 1px solid #ddd; */
+  border-radius: 8px;
+  margin-bottom: 10px;
+  /* background-color: #fff; */
+  transition: all 0.3s ease;
+}
+
+.menu-item-active {
+  border: 1px solid #e31c5f;
+  border-radius: 8px;
+  background-color: #fff0f5;
+}
+
+.menu-header {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+}
+
+.menu-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.menu-icon {
+  font-size: 1.2rem;
+}
+
+.menu-title {
+  font-weight: 500;
+}
+
+.submenu {
+  padding: 10px 20px;
+  list-style: none;
+  margin: 0;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.submenu li {
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.submenu li:hover {
+  color: #e31c5f;
+  font-weight: 500;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
 }

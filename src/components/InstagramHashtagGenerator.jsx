@@ -95,9 +95,9 @@ const InstagramHashtagGenerator = () => {
             <FontAwesomeIcon
               className="headerIcon"
               icon={faCheck}
-              style={{ color: "#1F7D53" }}
+              style={{ color: "#20c997" }}
             />
-            <span className="headerTool" style={{ color: "#1F7D53" }}>
+            <span className="headerTool"  style={{ color: "#20c997" }}>
               Copied
             </span>
           </span>
