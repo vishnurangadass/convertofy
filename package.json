@@ -2,6 +2,7 @@
   "name": "convertofy",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://vishnurangadass.github.io/convertofy",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
@@ -30,7 +31,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build-css": "sass src/scss/main.scss src/css/style.css --no-source-map --style=compressed",
-    "watch-css": "sass --watch src/scss/main.scss src/css/style.css --no-source-map"
+    "watch-css": "sass --watch src/scss/main.scss src/css/style.css --no-source-map",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -51,6 +54,7 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^6.3.0",
     "sass": "^1.93.2"
   }
 }
