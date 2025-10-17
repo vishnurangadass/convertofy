@@ -1,32 +1,11 @@
 import "./App.css";
-import { useState } from "react";
+import "./css/style.css";
+import { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//import Home from "./components/Home";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
 import UnitConverter from "./components/UnitCoverter";
 import EMICalculator from "./components/EMICalculator";
-import darkLogo from "./assets/convertofy-new-horizontal-logo-black.png";
-//import lightLogo from "./assets/convertofy-new-horizontal-logo-white.png";
-
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-//import ThemeToggle from "./components/ThemeToggle";
-import CaseConverter from "./components/CaseConverter";
-import {
-  faAngleDown,
-  faAngleUp,
-  faArrowUpAZ,
-  faCalculator,
-  faCalendarWeek,
-  faCoins,
-  faHashtag,
-  faMoneyBills,
-  faPercentage,
-  faQrcode,
-  faScrewdriverWrench,
-  faSliders,
-  faKeyboard,
-  faSquareMinus,
-} from "@fortawesome/free-solid-svg-icons";
-
 import AgeCalculator from "./components/AgeCalculator";
 import WordCounter from "./components/WordCounter";
 import QrCodeGenerator from "./components/QrCodeGenerator";
@@ -34,114 +13,155 @@ import SimpleInterestCalculator from "./components/SimpleInterestCalculator";
 import CompoundInterestCalculator from "./components/CompoundInterestCalculator";
 import InstagramHashtagGenerator from "./components/InstagramHashtagGenerator";
 import UnderscoreRemover from "./components/UnderscoreRemover";
+import CaseConverter from "./components/CaseConverter";
+
+import darkLogo from "./assets/convertofy-new-horizontal-logo-black.png";
+
+import {
+  faAngleDown,
+  faAngleUp,
+  faArrowUpAZ,
+  faCalculator,
+  faCalendarWeek,
+  faCoins,
+  faMoneyBills,
+  faPercentage,
+  faQrcode,
+  faHashtag,
+  faScrewdriverWrench,
+  faSliders,
+  faKeyboard,
+  faSquareMinus,
+} from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const [activeIndex, setActiveIndex] = useState(null);
+  const menuRef = useRef(null);
+
+  // ✅ Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setActiveIndex(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // ✅ Helper to close dropdown when clicking a menu item
+  const closeMenu = () => setActiveIndex(null);
+
+  // ✅ Tool data simplified — generates links dynamically
   const toolData = [
     {
       category: "All Tools",
+      icon: faScrewdriverWrench,
       items: [
-        <Link className="App-link" to="/case-converter">
-          <FontAwesomeIcon className="menuIcon" icon={faArrowUpAZ} />
-          Case Converter
-        </Link>,
-        <Link className="App-link" to="/word-counter">
-          <FontAwesomeIcon className="menuIcon" icon={faCalculator} />
-          Word Counter
-        </Link>,
-        <Link className="App-link" to="/underscore-remover">
-          <FontAwesomeIcon className="menuIcon" icon={faSquareMinus} />
-          Underscore & Hyphen Remover
-        </Link>,
-        <Link className="App-link" to="/qr-code-generator">
-          <FontAwesomeIcon className="menuIcon" icon={faQrcode} />
-          QR Code Generator
-        </Link>,
-        <Link className="App-link" to="/instagram-hashtag-generator">
-          <FontAwesomeIcon className="menuIcon" icon={faHashtag} />
-          Hashtag Generator
-        </Link>,
-        <Link className="App-link" to="/age-calculator">
-          <FontAwesomeIcon className="menuIcon" icon={faCalendarWeek} /> Age
-          Calculator
-        </Link>,
-        <Link className="App-link" to="/emi-calculator">
-          <FontAwesomeIcon className="menuIcon" icon={faMoneyBills} />
-          EMI Calculator
-        </Link>,
-        <Link className="App-link" to="/simpleInterest-calculator">
-          <FontAwesomeIcon className="menuIcon" icon={faPercentage} />
-          Simple Interest Calculator
-        </Link>,
-        <Link className="App-link" to="/compoundInterest-calculator">
-          <FontAwesomeIcon className="menuIcon" icon={faCoins} />
-          Compound Interest Calculator
-        </Link>,
+        { path: "/case-converter", icon: faArrowUpAZ, label: "Case Converter" },
+        { path: "/word-counter", icon: faCalculator, label: "Word Counter" },
+        {
+          path: "/underscore-remover",
+          icon: faSquareMinus,
+          label: "Underscore & Hyphen Remover",
+        },
+        {
+          path: "/qr-code-generator",
+          icon: faQrcode,
+          label: "QR Code Generator",
+        },
+        {
+          path: "/instagram-hashtag-generator",
+          icon: faHashtag,
+          label: "Hashtag Generator",
+        },
+        {
+          path: "/age-calculator",
+          icon: faCalendarWeek,
+          label: "Age Calculator",
+        },
+        {
+          path: "/emi-calculator",
+          icon: faMoneyBills,
+          label: "EMI Calculator",
+        },
+        {
+          path: "/simpleInterest-calculator",
+          icon: faPercentage,
+          label: "Simple Interest Calculator",
+        },
+        {
+          path: "/compoundInterest-calculator",
+          icon: faCoins,
+          label: "Compound Interest Calculator",
+        },
       ],
-      icon: <FontAwesomeIcon className="menuIcon" icon={faScrewdriverWrench} />,
     },
     {
       category: "Text Tools",
+      icon: faKeyboard,
       items: [
-        <Link className="App-link" to="/case-converter">
-          <FontAwesomeIcon className="menuIcon" icon={faArrowUpAZ} />
-          Case Converter
-        </Link>,
-        <Link className="App-link" to="/word-counter">
-          <FontAwesomeIcon className="menuIcon" icon={faCalculator} />
-          Word Counter
-        </Link>,
-        <Link className="App-link" to="/underscore-remover">
-          <FontAwesomeIcon className="menuIcon" icon={faSquareMinus} />
-          Underscore & Hyphen Remover
-        </Link>,
+        { path: "/case-converter", icon: faArrowUpAZ, label: "Case Converter" },
+        { path: "/word-counter", icon: faCalculator, label: "Word Counter" },
+        {
+          path: "/underscore-remover",
+          icon: faSquareMinus,
+          label: "Underscore & Hyphen Remover",
+        },
       ],
-      icon: <FontAwesomeIcon className="menuIcon" icon={faKeyboard} />,
     },
     {
       category: "Calculators",
+      icon: faCalculator,
       items: [
-        <Link className="App-link" to="/age-calculator">
-          <FontAwesomeIcon className="menuIcon" icon={faCalendarWeek} /> Age
-          Calculator
-        </Link>,
-        <Link className="App-link" to="/emi-calculator">
-          <FontAwesomeIcon className="menuIcon" icon={faMoneyBills} />
-          EMI Calculator
-        </Link>,
-        <Link className="App-link" to="/simpleInterest-calculator">
-          <FontAwesomeIcon className="menuIcon" icon={faPercentage} />
-          Simple Interest Calculator
-        </Link>,
-        <Link className="App-link" to="/compoundInterest-calculator">
-          <FontAwesomeIcon className="menuIcon" icon={faCoins} />
-          Compound Interest Calculator
-        </Link>,
+        {
+          path: "/age-calculator",
+          icon: faCalendarWeek,
+          label: "Age Calculator",
+        },
+        {
+          path: "/emi-calculator",
+          icon: faMoneyBills,
+          label: "EMI Calculator",
+        },
+        {
+          path: "/simpleInterest-calculator",
+          icon: faPercentage,
+          label: "Simple Interest Calculator",
+        },
+        {
+          path: "/compoundInterest-calculator",
+          icon: faCoins,
+          label: "Compound Interest Calculator",
+        },
       ],
-      icon: <FontAwesomeIcon className="menuIcon" icon={faCalculator} />,
     },
     {
       category: "Miscellaneous Tools",
+      icon: faSliders,
       items: [
-        <Link className="App-link" to="/qr-code-generator">
-          <FontAwesomeIcon className="menuIcon" icon={faQrcode} />
-          QR Code Generator
-        </Link>,
-        <Link className="App-link" to="/instagram-hashtag-generator">
-          <FontAwesomeIcon className="menuIcon" icon={faHashtag} />
-          Hashtag Generator
-        </Link>,
+        {
+          path: "/qr-code-generator",
+          icon: faQrcode,
+          label: "QR Code Generator",
+        },
+        {
+          path: "/instagram-hashtag-generator",
+          icon: faHashtag,
+          label: "Hashtag Generator",
+        },
       ],
-      icon: <FontAwesomeIcon className="menuIcon" icon={faSliders} />,
     },
   ];
+
   const toggleMenu = (index) => {
-    setActiveIndex(index === activeIndex ? null : index);
+    setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
   };
 
   return (
     <Router>
       <div className="App">
+        {/* Header */}
         <div className="header">
           <div className="header-content">
             <a href="/">
@@ -154,106 +174,66 @@ function App() {
               />
             </a>
           </div>
-          <div className="tools-wrapper">
-            {toolData.map((tool, index) => (
-              <div
-                key={tool.category}
-                className={
-                  activeIndex === index ? "menu-item-active" : "menu-item"
-                }
-              >
-                <div className="menu-header" onClick={() => toggleMenu(index)}>
-                  <div className="menu-left">
-                    {activeIndex === index ? (
-                      <span className="menu-icon" style={{ color: "#e31c5f" }}>
-                        {tool.icon}
-                      </span>
-                    ) : (
-                      <span className="menu-icon">{tool.icon} </span>
-                    )}
-                    {activeIndex === index ? (
-                      <span className="menu-title" style={{ color: "#e31c5f" }}>
+
+          {/* Tools Menu */}
+          <div className="tools-wrapper" ref={menuRef}>
+            {toolData.map((tool, index) => {
+              const isActive = activeIndex === index;
+              return (
+                <div
+                  key={tool.category}
+                  className={isActive ? "menu-item-active" : "menu-item"}
+                >
+                  <div
+                    className="menu-header"
+                    onClick={() => toggleMenu(index)}
+                  >
+                    <div className="menu-left">
+                      <FontAwesomeIcon
+                        className="menuIcon"
+                        icon={tool.icon}
+                        style={isActive ? { color: "#e31c5f" } : {color:"ffffff"}}
+                      />
+                      <span
+                        className="menu-title"
+                      >
                         {tool.category}
                       </span>
-                    ) : (
-                      <span className="menu-title">{tool.category}</span>
-                    )}
+                    </div>
+                    <FontAwesomeIcon
+                      className="icon-small"
+                      icon={isActive ? faAngleUp : faAngleDown}
+                      style={isActive ? { color: "#e31c5f" } : {color:"ffffff"}}
+                    />
                   </div>
-                  <div className="arrow">
-                    {activeIndex === index ? (
-                      <FontAwesomeIcon
-                        className="headerIcon"
-                        icon={faAngleUp}
-                        size="2xl"
-                        style={{ color: "#e31c5f" }}
-                      />
-                    ) : (
-                      <FontAwesomeIcon
-                        className="headerIcon"
-                        icon={faAngleDown}
-                        size="2xs"
-                      />
-                    )}
-                  </div>
+
+                  {isActive && (
+                    <ul className="submenu">
+                      {tool.items.map((item) => (
+                        <li key={item.path}>
+                          <Link
+                            className="App-link"
+                            to={item.path}
+                            onClick={closeMenu} // ✅ close dropdown on click
+                          >
+                            <FontAwesomeIcon
+                              className="menuIcon"
+                              icon={item.icon}
+                            />
+                            {item.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
-                {activeIndex === index && (
-                  <ul className="submenu">
-                    {tool.items.map((item, subIndex) => (
-                      <li key={`${tool.category}-${subIndex}`}>{item}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            ))}
+              );
+            })}
           </div>
-          {/* <ThemeToggle /> */}
         </div>
+
+        {/* Main Content */}
         <aside className="content-container">
-          <div className="sidebar">
-            {toolData.map((tool, index) => (
-              <div key={tool.category} className="menu-item">
-                <div className="menu-header" onClick={() => toggleMenu(index)}>
-                  <div className="menu-left">
-                    {activeIndex === index ? (
-                      <span className="menu-icon" style={{ color: "#e31c5f" }}>
-                        {tool.icon}
-                      </span>
-                    ) : (
-                      <span className="menu-icon">{tool.icon} </span>
-                    )}
-                    {activeIndex === index ? (
-                      <span className="menu-title" style={{ color: "#e31c5f" }}>
-                        {tool.category}
-                      </span>
-                    ) : (
-                      <span className="menu-title">{tool.category}</span>
-                    )}
-                  </div>
-                  <span className="arrow">
-                    {activeIndex === index ? (
-                      <FontAwesomeIcon
-                        className="headerIcon"
-                        icon={faAngleUp}
-                        style={{ color: "#e31c5f" }}
-                      />
-                    ) : (
-                      <FontAwesomeIcon
-                        className="headerIcon"
-                        icon={faAngleDown}
-                      />
-                    )}
-                  </span>
-                </div>
-                {activeIndex === index && (
-                  <ul className="submenu">
-                    {tool.items.map((item, subIndex) => (
-                      <li key={`${tool.category}-${subIndex}`}>{item}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            ))}
-          </div>
           <div className="App-header">
             <Routes>
               <Route path="/" element={<CaseConverter />} />
@@ -282,6 +262,8 @@ function App() {
             </Routes>
           </div>
         </aside>
+
+        {/* Footer */}
         <footer className="footer">
           <p>&copy; 2025 Convertofy Solutions.</p>
         </footer>

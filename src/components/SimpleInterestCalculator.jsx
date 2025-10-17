@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../styles/simpleinterestcalculator.css";
 
 const SimpleInterestCalculator = () => {
   const [principal, setPrincipal] = useState("");
@@ -53,7 +52,7 @@ const SimpleInterestCalculator = () => {
 
   return (
     <div className="sicalculator-container">
-      <h2 className="sicalculator-container-h2">Simple Interest Calculator</h2>
+       <h3 className="label-big">Simple Interest Calculator</h3>
       <div className="sicalculator-box">
         <form onSubmit={calculateInterest}>
           <div className="sicalculator-input-group">

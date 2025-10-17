@@ -43,12 +43,12 @@
   align-self: end;
   padding: 1rem;
 }
-.tools-child {
+/* .export-tools-child {
   display: flex;
   gap: 0.25rem;
   place-items: center;
-}
-.headerIcon {
+} */
+.icon-small {
   width: 15px;
   height: 15px;
 }
@@ -127,34 +127,34 @@ textarea {
   margin-left: 4px;
   color: #e31c5f;
 }
-.tools-child {
+/* .export-tools-child {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 14px;
-}
+} */
 
-.headerIcon {
+.icon-small {
   transition: transform 0.3s ease, color 0.3s ease;
   font-size: 16px;
 }
 
-.headerTool {
+/* .label-medium {
   font-size: 18px;
   transition: color 0.3s ease, opacity 0.3s ease;
-}
+} */
 
 /* Animate when "Copied" or "Cleared" appears */
-.tools-child.animated {
+/* .export-tools-child.animated {
   animation: popIn 0.3s ease forwards;
 }
 
-/* Optional subtle hover scaling */
-.tools-child:hover .headerIcon {
+/* Optional subtle hover scaling 
+.export-tools-child:hover .icon-small {
   transform: scale(1.2);
-}
+} */
 
 /* Pop animation keyframes */
 @keyframes popIn {
@@ -304,19 +304,6 @@ label {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-input[type="range"] {
-  width: 100%;
-  margin-right: 1rem;
-  accent-color: #e31c5f;
-}
-
-.slider-value {
-  font-size: 16px;
-  font-weight: 600;
-  min-width: 60px;
-  text-align: right;
 }
 
 /* Right Section - Output */

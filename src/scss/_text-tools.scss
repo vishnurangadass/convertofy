@@ -1,0 +1,48 @@
+@use "_fonts" as *;
+@use "_colors" as *;
+
+.text-tools-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.tools-header {
+  display: flex;
+  place-items: baseline;
+  gap: 0.5rem;
+}
+
+.text-tools-input-box {
+  width: 100%;
+  background-color: whitesmoke;
+  line-height: 1.75;
+  border: 0.25px solid rgb(98, 96, 96);
+  padding: 1.5rem;
+  resize: none;
+  border-radius: 10px;
+  font-size: $font-base;
+  height: 300px;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    border-color: $primary; // optional improvement for focus state
+    outline: none;
+  }
+}
+
+.error-message {
+  font-size: $font-medium;
+  color: $error-message;
+}
+
+.text-tools-buttons-wrapper {
+  display: flex;
+  gap: 1rem;
+}
+
+.text-tools-buttons-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}

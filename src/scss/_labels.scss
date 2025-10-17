@@ -1,0 +1,13 @@
+@use "_fonts" as *;
+
+@mixin label-medium{
+    font-size: $font-medium;
+    transition: color 0.3s ease, opacity 0.3s ease;
+}
+@mixin label-big{
+    font-size: $font-large;
+    font-weight: 600;
+}
+@mixin label-base{
+    font-size: $font-base;
+}

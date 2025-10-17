@@ -263,43 +263,43 @@ const Home = () => {
         <div className="content-header">
           <div className="tools">
             {!showCopyPopup ? (
-              <span className="tools-child" onClick={handleCopyToClipboard}>
+              <span className="export-tools-child" onClick={handleCopyToClipboard}>
                 <FontAwesomeIcon
-                  className="headerIcon"
+                  className="icon-small"
                   icon={faClone}
                   style={{ color: "#e31c5f" }}
                 />
-                <span className="headerTool">Copy</span>
+                <span className="label-medium">Copy</span>
               </span>
             ) : (
-              <span className="tools-child">
+              <span className="export-tools-child">
                 <FontAwesomeIcon
-                  className="headerIcon"
+                  className="icon-small"
                   icon={faCheck}
                   style={{ color: "#20c997" }}
                 />
-                <span className="headerTool" style={{ color: "#20c997" }}>
+                <span className="label-medium" style={{ color: "#20c997" }}>
                   Copied
                 </span>
               </span>
             )}
             {!showClearPopup ? (
-              <span className="tools-child" onClick={handleClear}>
+              <span className="export-tools-child" onClick={handleClear}>
                 <FontAwesomeIcon
-                  className="headerIcon"
+                  className="icon-small"
                   icon={faArrowsRotate}
                   style={{ color: "#e31c5f" }}
                 />
-                <span className="headerTool">Clear</span>
+                <span className="label-medium">Clear</span>
               </span>
             ) : (
-              <span className="tools-child">
+              <span className="export-tools-child">
                 <FontAwesomeIcon
-                  className="headerIcon"
+                  className="icon-small"
                   icon={faBroom}
                   style={{ color: "#20c997" }}
                 />
-                <span className="headerTool" style={{ color: "#20c997" }}>
+                <span className="label-medium" style={{ color: "#20c997" }}>
                   Cleared
                 </span>
               </span>

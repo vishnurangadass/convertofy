@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../styles/compoundinterestcalculator.css';
 
 const CompoundInterestCalculator = () => {
   const [principal, setPrincipal] = useState('');
@@ -37,7 +36,7 @@ const CompoundInterestCalculator = () => {
 
   return (
     <div className="cicalculator-container">
-      <h2 className='cicalculator-h2'>Compound Interest Calculator</h2>
+       <h3 className="label-big">Compound Interest Calculator</h3>
       <div className="cicalculator-box">
       <form onSubmit={calculateCompoundInterest}>
         <div className="cicalculator-input-group">

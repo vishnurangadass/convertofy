@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalculator } from "@fortawesome/free-solid-svg-icons";
-import "../styles/agecalculator.css";
+// import "../styles/agecalculator.css";
 
 const AgeCalculator = () => {
   const [dob, setDob] = useState("");
@@ -35,21 +35,21 @@ const AgeCalculator = () => {
   };
 
   return (
-    <div className="age-calculator-container">
-      <div className="case-converter-header">
+    <div className="calculator-tools-container">
+      <div className="tools-header">
         <div>
           <FontAwesomeIcon
-            className="toolIcon"
+            className="headingIcon"
             icon={faCalculator}
             style={{ color: "#e31c5f" }}
           />
         </div>
-        <h3>Age Calculator</h3>
+         <h3 className="label-big">Age Calculator</h3>
       </div>
-      <div className="age-calculator-wrapper">
-        <div className="age-calculator-box">
+      <div className="calculator-tools-wrapper">
+        <div className="calculator-tools-box">
           <div>
-            <label className="label">Date Of Birth</label>
+            <label className="calculator-tools-label">Date Of Birth</label>
             <input
               type="date"
               value={dob}
@@ -57,14 +57,14 @@ const AgeCalculator = () => {
             />
           </div>
           <div>
-            <label className="label">Age at date</label>
+            <label className="calculator-tools-label">Age at date</label>
             <input
               type="date"
               value={ageDate}
               onChange={(e) => setAgeDate(e.target.value)}
             />
           </div>
-          <button className="case-converter" onClick={calculateAge}>
+          <button className="base-button" onClick={calculateAge}>
             Calculate
           </button>
         </div>

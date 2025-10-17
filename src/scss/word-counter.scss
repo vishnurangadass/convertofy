@@ -1,0 +1,24 @@
+@use "_mixins" as *;
+
+.display-card {
+  display: flex;
+}
+
+.word-counter-go-corner {
+  @include go-corner;
+  width: 32px;
+}
+
+.word-counter-card {
+  @include card;
+  width: 225px;
+}
+
+.word-counter-card:before {
+  transform: scale(1);
+  transform-origin: 50% 50%;
+}
+
+.word-counter-card:hover p {
+  font-weight: 500;
+}

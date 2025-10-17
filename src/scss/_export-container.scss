@@ -1,0 +1,25 @@
+.export-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0.5rem;
+  gap: 1rem;
+}
+
+.export-tools-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+
+  &.animated {
+    animation: popIn 0.3s ease forwards;
+  }
+
+  &:hover {
+    .icon-small {
+      transform: scale(1.2);
+    }
+  }
+}

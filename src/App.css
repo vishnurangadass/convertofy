@@ -151,15 +151,17 @@ textarea {
   padding: 1rem;
 }
 
-.tools-child {
+/* .export-tools-child {
   display: flex;
   gap: 0.25rem;
   place-items: center;
-}
+} */
 
-.headerIcon {
+.icon-small {
   width: 15px;
   height: 15px;
+  transition: transform 0.3s ease, color 0.3s ease;
+  font-size: 16px;
 }
 
 textarea {
@@ -247,34 +249,29 @@ textarea {
   color: #e31c5f;
 }
 
-.tools-child {
+/* .export-tools-child {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 14px;
-}
+} */
 
-.headerIcon {
-  transition: transform 0.3s ease, color 0.3s ease;
-  font-size: 16px;
-}
-
-.headerTool {
+/* .label-medium {
   font-size: 18px;
   transition: color 0.3s ease, opacity 0.3s ease;
-}
+} */
 
 /* Animate when "Copied" or "Cleared" appears */
-.tools-child.animated {
+/* .export-tools-child.animated {
   animation: popIn 0.3s ease forwards;
-}
+} */
 
 /* Optional subtle hover scaling */
-.tools-child:hover .headerIcon {
+/* .export-tools-child:hover .icon-small {
   transform: scale(1.2);
-}
+} */
 
 /* Pop animation keyframes */
 @keyframes popIn {
@@ -344,14 +341,6 @@ textarea {
   height: 40px;
 }
 
-
-.menu-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-}
-
 .menu-left {
   display: flex;
   gap: 0.5rem;
@@ -376,15 +365,19 @@ textarea {
 }
 
 .submenu {
-  margin-top: 1.5rem;
   width: 300px;
-  padding: 1rem;
   font-size: 14px;
   color: var(--white);
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background: var(--muted-text);
+  background: var(--white);
+  z-index: 10;
+  padding: 10px 20px;
+  list-style: none;
+  border-radius: 0 0 5px 5px;
+  animation: fadeIn 0.3s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
 }
 
 /* Left Section - Form */
@@ -444,19 +437,6 @@ label {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-input[type="range"] {
-  width: 100%;
-  margin-right: 1rem;
-  accent-color: #e31c5f;
-}
-
-.slider-value {
-  font-size: 16px;
-  font-weight: 600;
-  min-width: 60px;
-  text-align: right;
 }
 
 /* Right Section - Output */
@@ -533,15 +513,24 @@ input[type="range"] {
 }
 
 .menu-item-active {
-  border: 1px solid #e31c5f;
-  border-radius: 8px;
-  background-color: #fff0f5;
+  border-radius: 5px 5px 0 0;
+  background-color: var(--white);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+}
+.menu-item-active .menu-title {
+  color: var(--primary);
+  font-weight: 700;
+}
+.menu-item-active .icon-small .menu-icon {
+  color: var(--primary);
 }
 
 .menu-header {
-  padding: 10px 15px;
+  padding: 10px 15px 0px 15px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
   cursor: pointer;
   user-select: none;
 }
@@ -558,13 +547,6 @@ input[type="range"] {
 
 .menu-title {
   font-weight: 500;
-}
-
-.submenu {
-  padding: 10px 20px;
-  list-style: none;
-  margin: 0;
-  animation: fadeIn 0.3s ease-in-out;
 }
 
 .submenu li {

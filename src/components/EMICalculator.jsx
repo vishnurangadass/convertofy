@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoneyBills } from "@fortawesome/free-solid-svg-icons";
-import "../styles/emicalculator.css"; // Include the CSS below in this file or import separately
+import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import "../styles/emicalculator.css";
 
 const formatINR = (num) =>
   new Intl.NumberFormat("en-IN", {
@@ -52,16 +53,20 @@ const generateSchedule = (principal, annualRate, tenureYears) => {
   return { emi: Math.round(emi), schedule };
 };
 
+const COLORS = ["#00C49F", "#FF8042"];
+
 const EMICalculator = () => {
-  const [loanAmount, setLoanAmount] = useState("");
-  const [interestRate, setInterestRate] = useState("");
-  const [loanTenure, setLoanTenure] = useState("");
+  const [loanAmount, setLoanAmount] = useState(0);
+  const [interestRate, setInterestRate] = useState(0);
+  const [loanTenure, setLoanTenure] = useState(0);
   const [result, setResult] = useState(null);
   const [emi, setEMI] = useState("0");
   const [totalInterest, setTotalInterest] = useState("0");
   const [totalPayment, setTotalPayment] = useState("0");
 
   useEffect(() => {
+    if (!loanAmount || !interestRate || !loanTenure) return;
+
     const monthlyRate = interestRate / 12 / 100;
     const months = loanTenure * 12;
     const emiCalc =
@@ -85,43 +90,119 @@ const EMICalculator = () => {
   };
 
   return (
-    <div className="age-calculator-container">
-      <div className="case-converter-header">
-        <div>
-          <FontAwesomeIcon
-            className="toolIcon"
-            icon={faMoneyBills}
-            style={{ color: "#e31c5f" }}
-          />
-        </div>
-        <h3>EMI Calculator</h3>
+    <div className="calculator-tools-container">
+      <div className="tools-header">
+        <FontAwesomeIcon
+          className="headingIcon"
+          icon={faMoneyBills}
+          style={{ color: "#e31c5f" }}
+        />
+         <h3 className="label-big">EMI Calculator</h3>
       </div>
-        <div className="age-calculator-box">
-        <label className="label">
-          Loan Amount
+
+      <div className="calculator-tools-box">
+        <div className="input-section">
+          <div className="input-content">
+            <label className="label">Loan Amount (₹)</label>
+            <input
+              className="input-box"
+              type="text"
+              name="loan-amount"
+              value={loanAmount}
+              onChange={(e) => setLoanAmount(+e.target.value)}
+              min="0"
+              max="20000000"
+              step="1000"
+            />
+          </div>
+
           <input
-            type="number"
+            type="range"
+            min="0"
+            max="20000000"
+            step="1000"
             value={loanAmount}
             onChange={(e) => setLoanAmount(+e.target.value)}
+            className="slider"
           />
-        </label>
-        <label className="label">
-          Interest Rate (%)
+
+          <div className="slider-labels">
+            <span>0</span>
+            <span>25L</span>
+            <span>50L</span>
+            <span>75L</span>
+            <span>100L</span>
+            <span>125L</span>
+            <span>150L</span>
+            <span>175L</span>
+            <span>200L</span>
+          </div>
+        </div>
+
+        {/* Interest Rate */}
+        <div className="input-section">
+          <div className="input-content">
+            <label className="label">Interest Rate (%)</label>
+            <input
+              className="input-box"
+              type="text"
+              name="interest-rate"
+              value={interestRate}
+              onChange={(e) => setInterestRate(+e.target.value)}
+              min="1"
+              max="20"
+              step="0.1"
+            />
+          </div>
           <input
-            type="number"
+            type="range"
+            min="1"
+            max="20"
+            step="0.1"
             value={interestRate}
             onChange={(e) => setInterestRate(+e.target.value)}
+            className="slider"
           />
-        </label>
-        <label className="label">
-          Loan Tenure (years)
+          <div className="slider-labels">
+            <span>1%</span>
+            <span>5%</span>
+            <span>10%</span>
+            <span>15%</span>
+            <span>20%</span>
+          </div>
+        </div>
+        <div className="input-section">
+          <div className="input-content">
+            <label className="label">Loan Tenure (Years)</label>
+            <input
+              className="input-box"
+              type="text"
+              name="loan-tenure"
+              value={loanTenure}
+              onChange={(e) => setLoanTenure(+e.target.value)}
+              min="1"
+              max="30"
+            />
+          </div>
           <input
-            type="number"
+            type="range"
+            min="1"
+            max="30"
+            step="1"
             value={loanTenure}
             onChange={(e) => setLoanTenure(+e.target.value)}
+            className="slider"
           />
-        </label>
-        <button className="case-converter" onClick={handleCalculate}>
+          <div className="slider-labels">
+            <span>1Y</span>
+            <span>5Y</span>
+            <span>10Y</span>
+            <span>20Y</span>
+            <span>30Y</span>
+          </div>
+        </div>
+
+        <button className="base-button" onClick={handleCalculate}>
           Calculate
         </button>
       </div>
@@ -129,17 +210,43 @@ const EMICalculator = () => {
       {result && (
         <div>
           <div className="emicalculator-result">
-            <p>
-              Loan EMI: <strong>₹ {emi.toLocaleString()}</strong>
-            </p>
-            <p>
-              Total Interest Payable:{" "}
-              <strong>₹ {result.totalInterest.toLocaleString()}</strong>
-            </p>
-            <p>
-              Total Payment (Principal + Interest):{" "}
-              <strong>₹ {result.totalPayment.toLocaleString()}</strong>
-            </p>
+            <div className="result-container">
+              <p>
+                Loan EMI: <strong>₹ {emi.toLocaleString()}</strong>
+              </p>
+              <p>
+                Total Interest Payable:{" "}
+                <strong>₹ {result.totalInterest.toLocaleString()}</strong>
+              </p>
+              <p>
+                Total Payment (Principal + Interest):{" "}
+                <strong>₹ {result.totalPayment.toLocaleString()}</strong>
+              </p>
+            </div>
+            <div className="result-chart">
+              <PieChart width={250} height={250}>
+                <Pie
+                  dataKey="value"
+                  data={[
+                    { name: "Principal", value: loanAmount },
+                    { name: "Interest", value: result.totalInterest },
+                  ]}
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={90}
+                  fill="#8884d8"
+                  label
+                >
+                  <Cell key="cell-principal" fill={COLORS[0]} />
+                  <Cell key="cell-interest" fill={COLORS[1]} />
+                </Pie>
+                <Tooltip
+                  formatter={(value) => formatINR(value)}
+                  contentStyle={{ fontSize: "13px" }}
+                />
+                <Legend verticalAlign="bottom" height={36} />
+              </PieChart>
+            </div>
           </div>
 
           <table className="repayment-table">

@@ -1,0 +1,13 @@
+@use "colors" as *;
+
+.headingIcon{
+  width: 23px;
+  height: 23px;
+  color: $primary;
+}
+.icon-small{
+  width: 15px;
+  height: 15px;
+  transition: transform 0.3s ease, color 0.3s ease;
+  font-size: 16px;
+}

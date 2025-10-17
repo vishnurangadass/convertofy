@@ -46,16 +46,16 @@ const QrCodeGenerator = () => {
     setShowQRCode(true);
   };
   return (
-    <div>
-      <div className="case-converter-header">
+     <div className="text-tools-wrapper">
+      <div className="tools-header">
         <div>
           <FontAwesomeIcon
-            className="toolIcon"
+            className="headingIcon"
             icon={faQrcode}
             style={{ color: "#e31c5f" }}
           />
         </div>
-        <h3>Qr Code Generator</h3>
+         <h3 className="label-big">Qr Code Generator</h3>
       </div>
       {showQRCode && (
         <div style={{ marginTop: "20px" }}>
@@ -72,50 +72,50 @@ const QrCodeGenerator = () => {
       <div>
         <div className="export-container">
           {!showCopyPopup ? (
-            <span className="tools-child" onClick={handleCopyToClipboard}>
+            <span className="export-tools-child" onClick={handleCopyToClipboard}>
               <FontAwesomeIcon
-                className="headerIcon"
+                className="icon-small"
                 icon={faClone}
                 style={{ color: "#e31c5f" }}
               />
-              <span className="headerTool">Copy</span>
+              <span className="label-medium">Copy</span>
             </span>
           ) : (
-            <span className="tools-child">
+            <span className="export-tools-child">
               <FontAwesomeIcon
-                className="headerIcon"
+                className="icon-small"
                 icon={faCheck}
                  style={{ color: "#20c997" }}
               />
-              <span className="headerTool"  style={{ color: "#20c997" }}>
+              <span className="label-medium"  style={{ color: "#20c997" }}>
                 Copied
               </span>
             </span>
           )}
           {!showClearPopup ? (
-            <span className="tools-child" onClick={handleClear}>
+            <span className="export-tools-child" onClick={handleClear}>
               <FontAwesomeIcon
-                className="headerIcon"
+                className="icon-small"
                 icon={faArrowsRotate}
                 style={{ color: "#e31c5f" }}
               />
-              <span className="headerTool">Clear</span>
+              <span className="label-medium">Clear</span>
             </span>
           ) : (
-            <span className="tools-child">
+            <span className="export-tools-child">
               <FontAwesomeIcon
-                className="headerIcon"
+                className="icon-small"
                 icon={faBroom}
                 style={{ color: "#20c997" }}
               />
-              <span className="headerTool" style={{ color: "#20c997" }}>
+              <span className="label-medium" style={{ color: "#20c997" }}>
                 Cleared
               </span>
             </span>
           )}
         </div>
         <textarea
-          className="case-converter-input-box"
+          className="text-tools-input-box"
           type="text"
           placeholder="Use me to convert you wish..."
           value={inputValue}
@@ -130,7 +130,7 @@ const QrCodeGenerator = () => {
             outline: "none",
           }}
         />
-        <button className="case-converter" onClick={handleQRCode}>
+        <button className="base-button" onClick={handleQRCode}>
           QR Code Generator
         </button>
       </div>

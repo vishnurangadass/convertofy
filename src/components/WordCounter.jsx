@@ -7,7 +7,6 @@ import {
   faCalculator,
   faCheck,
 } from "@fortawesome/free-solid-svg-icons";
-import "../styles/wordcounter.css";
 
 const WordCounter = () => {
   const [inputValue, setInputValue] = useState("");
@@ -47,64 +46,64 @@ const WordCounter = () => {
   };
   const stats = getTextStats(inputValue);
   return (
-    <div className="case-converter-wrapper">
-      <div className="case-converter-header">
+    <div className="text-tools-wrapper">
+      <div className="tools-header">
         <div>
           <FontAwesomeIcon
-            className="toolIcon"
+            className="headingIcon"
             icon={faCalculator}
             style={{ color: "#e31c5f" }}
           />
         </div>
-        <h3>Word Counter</h3>
+         <h3 className="label-big">Word Counter</h3>
       </div>
       <div>
         <div className="export-container">
           {!showCopyPopup ? (
-            <span className="tools-child" onClick={handleCopyToClipboard}>
+            <span className="export-tools-child" onClick={handleCopyToClipboard}>
               <FontAwesomeIcon
-                className="headerIcon"
+                className="icon-small"
                 icon={faClone}
                 style={{ color: "#e31c5f" }}
               />
-              <span className="headerTool">Copy</span>
+              <span className="label-medium">Copy</span>
             </span>
           ) : (
-            <span className="tools-child">
+            <span className="export-tools-child">
               <FontAwesomeIcon
-                className="headerIcon"
+                className="icon-small"
                 icon={faCheck}
                  style={{ color: "#20c997" }}
               />
-              <span className="headerTool"  style={{ color: "#20c997" }}>
+              <span className="label-medium"  style={{ color: "#20c997" }}>
                 Copied
               </span>
             </span>
           )}
           {!showClearPopup ? (
-            <span className="tools-child" onClick={handleClear}>
+            <span className="export-tools-child" onClick={handleClear}>
               <FontAwesomeIcon
-                className="headerIcon"
+                className="icon-small"
                 icon={faArrowsRotate}
                 style={{ color: "#e31c5f" }}
               />
-              <span className="headerTool">Clear</span>
+              <span className="label-medium">Clear</span>
             </span>
           ) : (
-            <span className="tools-child">
+            <span className="export-tools-child">
               <FontAwesomeIcon
-                className="headerIcon"
+                className="icon-small"
                 icon={faBroom}
                 style={{ color: "#20c997" }}
               />
-              <span className="headerTool" style={{ color: "#20c997" }}>
+              <span className="label-medium" style={{ color: "#20c997" }}>
                 Cleared
               </span>
             </span>
           )}
         </div>
         <textarea
-          className="case-converter-input-box"
+          className="text-tools-input-box"
           type="text"
           placeholder="Use me to convert you wish..."
           value={inputValue}
@@ -120,29 +119,29 @@ const WordCounter = () => {
           }}
         />
         <div className="display-card">
-          <div className="card1">
+          <div className="word-counter-card">
             <span>{stats.characterCount}</span>
             <p className="small">
               {stats.characterCount <= 1 ? "Letter" : "Letters"}
             </p>
-            <div className="go-corner"></div>
+            <div className="word-counter-go-corner"></div>
           </div>
-          <div className="card1">
+          <div className="word-counter-card">
             <span>{stats.wordCount}</span>
             <p className="small">{stats.wordCount <= 1 ? "Word" : "Words"}</p>
-            <div className="go-corner"></div>
+            <div className="word-counter-go-corner"></div>
           </div>
-          <div className="card1">
+          <div className="word-counter-card">
             <span>{stats.sentenceCount}</span>
             <p className="small">
               {stats.sentenceCount <= 1 ? "Sentence" : "Sentences"}
             </p>
-            <div className="go-corner"></div>
+            <div className="word-counter-go-corner"></div>
           </div>
-          <div className="card1">
+          <div className="word-counter-card">
             <span>{stats.lineCount}</span>
             <p className="small">{stats.lineCount <= 1 ? "Line" : "Lines"}</p>
-            <div className="go-corner"></div>
+            <div className="word-counter-go-corner"></div>
           </div>
         </div>
       </div>

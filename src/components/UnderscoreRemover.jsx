@@ -6,7 +6,6 @@ import {
   faBroom,
   faCheck,
 } from "@fortawesome/free-solid-svg-icons";
-import "../styles/caseconverter.css";
 
 const UnderscoreRemover = () => {
   const [inputValue, setInputValue] = useState("");
@@ -71,64 +70,64 @@ const handleRemoveHyphen = () => {
 };
 
   return (
-    <div className="case-converter-wrapper">
-      <div className="case-converter-header">
+    <div className="text-tools-wrapper">
+      <div className="tools-header">
         <div>
           <FontAwesomeIcon
-            className="toolIcon"
+            className="headingIcon"
             icon={faSquareMinus}
             style={{ color: "#e31c5f" }}
           />
         </div>
-        <h3>Underscore & Hyphen Remover</h3>
+         <h3 className="label-big">Underscore & Hyphen Remover</h3>
       </div>
       <div>
         <div className="export-container">
           {!showCopyPopup ? (
-            <span className="tools-child" onClick={handleCopyToClipboard}>
+            <span className="export-tools-child" onClick={handleCopyToClipboard}>
               <FontAwesomeIcon
-                className="headerIcon"
+                className="icon-small"
                 icon={faClone}
                 style={{ color: "#e31c5f" }}
               />
-              <span className="headerTool">Copy</span>
+              <span className="label-medium">Copy</span>
             </span>
           ) : (
-            <span className="tools-child">
+            <span className="export-tools-child">
               <FontAwesomeIcon
-                className="headerIcon"
+                className="icon-small"
                 icon={faCheck}
                 style={{ color: "#20c997" }}
               />
-              <span className="headerTool" style={{ color: "#20c997" }}>
+              <span className="label-medium" style={{ color: "#20c997" }}>
                 Copied
               </span>
             </span>
           )}
           {!showClearPopup ? (
-            <span className="tools-child" onClick={handleClear}>
+            <span className="export-tools-child" onClick={handleClear}>
               <FontAwesomeIcon
-                className="headerIcon"
+                className="icon-small"
                 icon={faArrowsRotate}
                 style={{ color: "#e31c5f" }}
               />
-              <span className="headerTool">Clear</span>
+              <span className="label-medium">Clear</span>
             </span>
           ) : (
-            <span className="tools-child">
+            <span className="export-tools-child">
               <FontAwesomeIcon
-                className="headerIcon"
+                className="icon-small"
                 icon={faBroom}
                 style={{ color: "#20c997" }}
               />
-              <span className="headerTool" style={{ color: "#20c997" }}>
+              <span className="label-medium" style={{ color: "#20c997" }}>
                 Cleared
               </span>
             </span>
           )}
         </div>
         <textarea
-          className="case-converter-input-box"
+          className="text-tools-input-box"
           type="text"
           placeholder="Use me to convert you wish..."
           value={inputValue}
@@ -145,12 +144,12 @@ const handleRemoveHyphen = () => {
         />
         {showError && <span className="error-message">{showError}</span>}
       </div>
-      <div className="case-converter-container">
-        <div className="case-converter-tools-container">
-          <button className="case-converter" onClick={handleRemoveUnderscore}>
+      <div className="text-tools-buttons-wrapper">
+        <div className="text-tools-buttons-container">
+          <button className="base-button" onClick={handleRemoveUnderscore}>
             Remove Underscore
           </button>
-          <button className="case-converter" onClick={handleRemoveHyphen}>
+          <button className="base-button" onClick={handleRemoveHyphen}>
             Remove Hyphen
           </button>
         </div>
